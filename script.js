@@ -154,7 +154,7 @@ function del(id) {
     showTable();
 }
 
-function exportToExcel() {
+function exportTableToExcel() {
     let table = document.getElementById("table");
     let wb = XLSX.utils.table_to_book(table, { sheet: "Students" });
     XLSX.writeFile(wb, "students.xlsx");
