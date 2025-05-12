@@ -156,12 +156,6 @@ function del(id) {
 
 function exportToExcel() {
     let table = document.getElementById("table");
-    let tableHTML = table.outerHTML.replace(/ /g, '%20');
-    let filename = 'students.xls';
-    let downloadLink = document.createElement("a");
-    document.body.appendChild(downloadLink);
-    downloadLink.href = 'data:application/vnd.ms-excel,' + tableHTML;
-    downloadLink.download = filename;
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+    let wb = XLSX.utils.table_to_book(table, { sheet: "Students" });
+    XLSX.writeFile(wb, "students.xlsx");
 }
