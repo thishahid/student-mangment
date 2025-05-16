@@ -41,7 +41,7 @@ function saveToStorage() {
 }
 
 function updateChartData(gpa) {
-    let gpaNum = Math.round(Number(gpa)); // Convert to number and round to nearest integer
+    //let gpaNum = Math.round(Number(gpa)); // Convert to number and round to nearest integer
     if (gpa >= 0 && gpa <= 10) {
         gpaChart.data.datasets[0].data[gpa]++;
         gpaChart.update();
