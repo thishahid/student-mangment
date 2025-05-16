@@ -1,6 +1,12 @@
 var count = 0;
-var students = [];
+// Load students from local storage
+var students = JSON.parse(localStorage.getItem("students")) || [];
 var global_id;
+
+// Update count to avoid duplicate IDs
+if (students.length > 0) {
+    count = Math.max(...students.map(s => s.ID));
+}
 
 const ctx = document.getElementById('gpaChart').getContext('2d');
 const canvas = ctx.canvas;
@@ -30,7 +36,12 @@ const gpaChart = new Chart(ctx, {
     }
 });
 
+function saveToStorage() {
+    localStorage.setItem("students", JSON.stringify(students));
+}
+
 function updateChartData(gpa) {
+    let gpaNum = Math.round(Number(gpa)); // Convert to number and round to nearest integer
     if (gpa >= 0 && gpa <= 10) {
         gpaChart.data.datasets[0].data[gpa]++;
         gpaChart.update();
@@ -59,6 +70,7 @@ function addStudent() {
         studentobj['semester'] = semesterValue;
         studentobj['degree'] = degreeValue;
         students[index] = studentobj;
+        saveToStorage();
         showTable();
         document.querySelector("#submit").innerHTML = "Add Student";
         clearForm();
@@ -80,6 +92,7 @@ function addStudent() {
         degree: degreeValue
     });
 
+    saveToStorage();
     clearForm();
     showTable();
     updateChartData(gradeValue);
@@ -126,6 +139,7 @@ function search() {
 
         if (
             (name && name.innerText.toUpperCase().includes(filter)) ||
+            (email && email.innerText.toUpperCase().includes(filter)) ||
             (degree && degree.innerText.toUpperCase().includes(filter)) ||
             (semester && semester.innerText.toUpperCase().includes(filter))
         ) {
@@ -151,6 +165,7 @@ function edit(id) {
 
 function del(id) {
     students = students.filter(student => student.ID !== id);
+    saveToStorage();
     showTable();
 }
 
@@ -159,3 +174,6 @@ function exportTableToExcel() {
     let wb = XLSX.utils.table_to_book(table, { sheet: "Students" });
     XLSX.writeFile(wb, "students.xlsx");
 }
+
+// Call once on page load
+showTable();

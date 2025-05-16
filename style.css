@@ -28,14 +28,20 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .input-container input,
   .input-container select {
     flex: 1 1 200px;
+    min-width: 0;
+    max-width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
   }
 
   /* Button */
@@ -114,11 +120,18 @@ body {
   }
 
   @media (max-width: 480px) {
+    .input-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
     .input-container input,
     .input-container select,
     .search,
     .button {
       width: 100%;
+      min-width: 0;
+      max-width: 100%;
     }
   }
   /* Responsive styles */
@@ -138,6 +151,7 @@ body {
   @media (max-width: 480px) {
     .input-container {
       flex-direction: column;
+      align-items: stretch;
     }
 
     .input-container input,
@@ -145,6 +159,8 @@ body {
     .search,
     .button {
       width: 100%;
+      min-width: 0;
+      max-width: 100%;
     }
   }
   /* Dark mode styles */
