@@ -17,7 +17,7 @@
         <h1>Student Management</h1>
         <div class="input-container">
             <input type="text" placeholder="Name" id="name">
-            <input type="email" placeholder="Email" id="email">
+            <input type="email" placeholder="Enrollment" id="email">
             <input type="text" placeholder="GPA" id="grade">
             <input type="number" placeholder="Semester (1-8)" id="semester" min="1" max="8">
             <select id="degree">
@@ -31,14 +31,14 @@
             </select>
         </div>
         <button class="button" type="submit" id="submit" onclick="addStudent()">Add Student</button>
-        <input class="search" type="text" id="search" onkeyup="search()" placeholder="Search by Name, Degree or Semester">
+        <input class="search" type="text" id="search" onkeyup="search()" placeholder="Search by Name, Degree, Enrollment or Semester">
         <button class="button" onclick="exportTableToExcel('table', 'students')">Export to Excel</button>
         <table class="table" id="table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Student Name</th>
-                    <th>Email</th>
+                    <th>Enrollment</th>
                     <th>Semester</th>
                     <th>GPA</th>
                     <th>Degree</th>
